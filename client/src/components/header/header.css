@@ -1,0 +1,138 @@
+:root {
+  --header-bg-color: var(--system-gray-2);
+}
+[data-theme="dark"] {
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--system-gray-1);
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+/* Hamburger Button */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger {
+  width: 24px;
+  height: 2px;
+  background-color: var(--system-gray-10);
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: var(--system-gray-10);
+  transition: all 0.3s ease;
+}
+
+.hamburger::before {
+  top: -8px;
+}
+
+.hamburger::after {
+  top: 8px;
+}
+
+.hamburger.open {
+  background-color: transparent;
+}
+
+.hamburger.open::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.hamburger.open::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+/* Nav menu */
+.nav-menu {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.nav-link {
+  min-width: 90px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--system-gray-10);
+  font-weight: 500;
+  font-family: var(--font-body);
+  padding: var(--space-xs) var(--space-sm);
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--highlight-color);
+}
+
+.nav-link.active {
+  color: var(--highlight-color);
+  border-bottom: 2px solid var(--highlight-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--system-gray-1);
+    flex-direction: column;
+    width: 100%;
+    padding: var(--space-md);
+    display: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--system-gray-3);
+  }
+}

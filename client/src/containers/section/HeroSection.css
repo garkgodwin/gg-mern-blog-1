@@ -1,0 +1,76 @@
+:root {
+  --hero-bg-color: var(--system-color-1);
+  --hero-heading-txt-color: var(--system-gray-10);
+  --hero-subtitle-txt-color: var(--system-gray-8);
+  --hero-cta-bg-color: var(--secondary-color);
+  --hero-cta-txt-color: var(--system-gray-0);
+}
+
+.hero-section {
+  width: 100%;
+  background-color: var(--hero-bg-color);
+  padding: var(--space-xl) var(--space-md);
+  text-align: center;
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0.1)
+    ),
+    linear-gradient(
+      to left,
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0.1)
+    ),
+    url("../../assets/hero-1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-section.hero-section-about {
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0.1)
+    ),
+    linear-gradient(
+      to left,
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0.1)
+    ),
+    url("../../assets/about-hero-1.png");
+}
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-heading {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--hero-heading-txt-color);
+  margin-bottom: var(--space-sm);
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  color: var(--hero-subtitle-txt-color);
+  margin-bottom: var(--space-md);
+}
+
+.hero-btn {
+  display: inline-block;
+  background-color: var(--hero-cta-bg-color);
+  color: var(--hero-cta-txt-color);
+  font-weight: bold;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.hero-btn:hover {
+  background-color: var(--hero-cta-bg-color);
+  color: var(--hero-cta-txt-color);
+}

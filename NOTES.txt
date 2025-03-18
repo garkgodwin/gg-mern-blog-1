@@ -1,0 +1,6 @@
+Note 1:
+When referencing other models, make sure it matches their schema name.
+For example we have the user model, the shema name it has when it is being registered to models
+is "user" with all no caps, the error I encountered was that
+the reference being used in ohter models is "User" with 
+uppercase. This throws an error, the "User" is not registered or something.

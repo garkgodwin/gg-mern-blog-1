@@ -1,0 +1,147 @@
+:root {
+  /* Color Palette */
+  --primary-color: #3f51b5;
+  --secondary-color: #ff5722;
+  --highlight-color: #009688; /* Use in CTA */
+
+  --system-gray-0: #ffffff; /* Pure White */
+  --system-gray-1: #fafafa; /* Lightest Gray */
+  --system-gray-2: #f0f0f0;
+  --system-gray-3: #e0e0e0;
+  --system-gray-4: #cccccc;
+  --system-gray-5: #b0b0b0;
+  --system-gray-6: #999999;
+  --system-gray-7: #757575;
+  --system-gray-8: #555555;
+  --system-gray-9: #383838;
+  --system-gray-10: #212121; /* Almost Black */
+
+  /* BODY */
+  --body-bg-color: var(--system-gray-1);
+  --body-txt-color: var(--system-gray-10);
+
+  /* Typography */
+  --font-body: "Poopins", sans-serif;
+  --font-heading: "Roboto", sans-serif;
+  --font-footer: "Arial", sans-serif;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+}
+[data-theme="dark"] {
+  /* Color Palette (Dark Mode Adapted) */
+  --primary-color: #90caf9; /* Lighter Indigo for contrast */
+  --secondary-color: #ff8a65; /* Softened Deep Orange */
+  --highlight-color: #26a69a; /* Brighter Teal */
+
+  /* System Grays (Inverted for Dark Theme) */
+  --system-gray-0: #121212; /* Almost Black */
+  --system-gray-1: #1e1e1e;
+  --system-gray-2: #2c2c2c;
+  --system-gray-3: #3a3a3a;
+  --system-gray-4: #4a4a4a;
+  --system-gray-5: #5c5c5c;
+  --system-gray-6: #777777;
+  --system-gray-7: #999999;
+  --system-gray-8: #bdbdbd;
+  --system-gray-9: #e0e0e0;
+  --system-gray-10: #f5f5f5; /* Near White for Contrast Text */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+html,
+body,
+#root {
+  background-color: var(--body-bg-color);
+  color: var(--body-txt-color);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  position: relative;
+  width: 100%;
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#root .page,
+#root .header,
+#root .footer {
+  max-width: 100%;
+}
+
+section {
+  padding: 0 2rem;
+}
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+p {
+  margin-bottom: var(--space-md);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: var(--space-lg) 0;
+}
+
+button,
+.btn {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  padding: var(--space-sm) var(--space-md);
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--link-hover-color);
+}
+
+/* Optional - Code Blocks / Quotes */
+pre,
+code {
+  background-color: #f5f5f5;
+  padding: var(--space-sm);
+  border-radius: 4px;
+  font-family: "Courier New", monospace;
+}
+
+blockquote {
+  border-left: 4px solid var(--secondary-accent);
+  padding-left: var(--space-md);
+  color: #555;
+  font-style: italic;
+  margin: var(--space-md) 0;
+}
