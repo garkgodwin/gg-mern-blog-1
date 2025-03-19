@@ -97,3 +97,8 @@
   border-top: 1px solid var(--system-gray-4);
   padding-top: var(--space-sm);
 }
+
+/* Footer Auth */
+.footer.footer-auth .footer-bottom {
+  border-top: 1px solid transparent;
+}

@@ -1,15 +1,19 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+//components
 import Page from "../../containers/page/Page";
 import Form from "../../containers/form/Form";
 import FormFields from "./../../containers/form/FormFields";
 import FormActions from "./../../containers/form/FormActions";
 import FormButton from "../../components/buttons/FormButton";
 import FormInput from "./../../components/inputs/FormInput";
-import { useDispatch, useSelector } from "react-redux";
+//state
 import { loginUser } from "./../../features/auth/authSlice";
 
 const Welcome = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     username: "",
@@ -19,8 +23,10 @@ const Welcome = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const result = dispatch(loginUser(formData));
-    console.log(result);
+    const result = await dispatch(loginUser(formData));
+    if (result.payload.accessToken && result.payload.id) {
+      navigate("/");
+    }
   };
   return (
     <Page>

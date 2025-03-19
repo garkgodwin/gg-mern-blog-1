@@ -9,8 +9,8 @@ export const refreshAccess = async () => {
   return await axios.get("/auth/refreshAccessToken");
 };
 // Logout
-export const logout = async () => {
-  return await axios.get("/logout");
+export const signout = async () => {
+  return await axios.get("/auth/signout");
 };
 
 // Check session or get user data

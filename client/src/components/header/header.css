@@ -109,6 +109,16 @@
   border-bottom: 2px solid var(--highlight-color);
 }
 
+/* HEADER AUTHED */
+.header-auth {
+  height: 40px;
+  width: 100%;
+  position: relative;
+}
+.header-auth .nav-brand a {
+  font-size: 16px !important;
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .menu-toggle {

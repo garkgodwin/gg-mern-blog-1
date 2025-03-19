@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { signin, refreshAccess } from "../../api/authApi";
+import { signin, signout, refreshAccess } from "../../api/authApi";
 import { setAuthToken } from "../../api/axios";
 
 export const loginUser = createAsyncThunk(
@@ -20,9 +20,25 @@ export const refreshAccessToken = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await refreshAccess();
-      return res.data; // { token }
+      return res.data;
     } catch (err) {
-      return rejectWithValue("Refresh token expired");
+      return rejectWithValue("You are forbidden");
+    }
+  }
+);
+
+export const logoutUser = createAsyncThunk(
+  "auth/logoutUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await signout();
+      console.log(response);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(
+        err.response?.data?.message || "Logout failed"
+      );
     }
   }
 );
@@ -42,8 +58,8 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logout: (state) => {
-      state = initialState;
+    something: (state) => {
+      console.log("lol");
     },
   },
   extraReducers: (builder) => {
@@ -51,8 +67,6 @@ export const authSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
-        state.isAuthenticated = false;
-        setAuthToken(null);
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
@@ -68,14 +82,10 @@ export const authSlice = createSlice({
         console.log(action);
         state.loading = false;
         state.error = action.payload;
-        state.isAuthenticated = false;
-        setAuthToken(null);
       })
       .addCase(refreshAccessToken.pending, (state) => {
         state.loading = true;
         state.error = null;
-        state.isAuthenticated = false;
-        setAuthToken(null);
       })
       .addCase(refreshAccessToken.fulfilled, (state, action) => {
         state.loading = false;
@@ -92,10 +102,28 @@ export const authSlice = createSlice({
         state.error = action.payload;
         state.isAuthenticated = false;
         setAuthToken(null);
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.id = null;
+        state.username = "";
+        state.email = "";
+        state.roles = [];
+        state.accessToken = null;
+        state.isAuthenticated = false;
+        setAuthToken(null);
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { logout } = authSlice.actions;
+export const { something } = authSlice.actions;
 export default authSlice.reducer;

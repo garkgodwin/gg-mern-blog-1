@@ -1,0 +1,22 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.app.app-auth {
+  flex-direction: row;
+  width: 100%;
+}
+
+.app.app-auth .app-right {
+  margin-left: 220px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-right {
+  width: 100%;
+  position: relative !important;
+}
