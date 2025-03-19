@@ -23,7 +23,8 @@ app.use(helmet());
 
 // TODO: uncomment cors if testing api only to allow access
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: process.env.MY_CLIENT_URL,
+  credentials: true, // for withcredentials in axios which is used by cookie-session
 };
 
 app.use(cors(corsOptions));
@@ -40,9 +41,9 @@ app
         process.env.MY_SECRET_COOKIE_1,
         process.env.MY_SECRET_COOKIE_2,
       ], // should use as secret environment variable
-      httpOnly: true,
-      sameSite: process.env.MY_COOKIE_SAME_SITE_DEV, //TODO: change to none in PROD if cross domain and https
-      secure: false, //TODO: set to true in production with HTTPS
+      httpOnly: true, // to store the refresh token in http only
+      sameSite: "lax", // or 'none' if you're on HTTPS
+      secure: false, // true in production with HTTPS
     })
   );
 
@@ -68,6 +69,7 @@ db.mongoose
 
 //!! FOR expressV5 - no more error calling in api calls. V5 handles it
 app.use((err, req, res, next) => {
+  console.log(err);
   console.error(err.stack);
   res.status(err.status || 500).send({ message: "Something broke!" });
 });

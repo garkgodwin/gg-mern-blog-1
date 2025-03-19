@@ -12,7 +12,7 @@ module.exports = function (app) {
     next();
   });
 
-  router.get("/api/test/all", controller.allAccess);
+  router.get("/all", controller.allAccess);
 
   //? ADMIN FUNCTIONS
   router.get(

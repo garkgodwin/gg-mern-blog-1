@@ -5,13 +5,12 @@ const User = db.users;
 const ROLES = db.ROLES;
 
 verifyToken = (req, res, next) => {
-  let token = req.session.token;
-
+  let token = req.session.refreshToken;
   if (!token) {
     return res.status(403).send({ message: "No token provided!" });
   }
 
-  jwt.verify(token, config.secret, (err, decoded) => {
+  jwt.verify(token, config.secret_refresh, (err, decoded) => {
     if (err) {
       return res.status(401).send({
         message: "Unauthorized!",

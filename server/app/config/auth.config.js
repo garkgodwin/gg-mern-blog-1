@@ -1,3 +1,4 @@
 module.exports = {
-  secret: process.env.MY_SECRET, //TODO: change later
+  secret_refresh: process.env.JWT_SECRET_REFRESH,
+  secret_access: process.env.JWT_SECRET_ACCESS,
 };

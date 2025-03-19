@@ -5,17 +5,22 @@ import FormFields from "./../../containers/form/FormFields";
 import FormActions from "./../../containers/form/FormActions";
 import FormButton from "../../components/buttons/FormButton";
 import FormInput from "./../../components/inputs/FormInput";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "./../../features/auth/authSlice";
 
 const Welcome = () => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    const result = dispatch(loginUser(formData));
+    console.log(result);
   };
   return (
     <Page>
