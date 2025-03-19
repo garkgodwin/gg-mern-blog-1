@@ -1,0 +1,74 @@
+.form-box {
+  min-width: 320px;
+  min-height: 320px;
+  margin: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 24px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-box .form-header {
+  font-size: 32px;
+  text-align: center;
+}
+.form-box .form-desc {
+  font-size: 18px;
+  text-align: center;
+}
+
+.form {
+  margin-bottom: 24px;
+}
+
+/* FORM INPUT */
+.form .form-input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  min-height: 36px;
+}
+
+.form-input label {
+  font-size: 16px;
+  color: var(--system-gray-9);
+}
+.form-input input {
+  font-size: 16px;
+  color: var(--system-gray-10);
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--primary-color);
+  padding: 4px;
+}
+
+/* FLEX DIRECTIONS */
+.form-input.form-input-col {
+  flex-direction: column;
+}
+.form-input.form-input-row {
+  flex-direction: row;
+}
+.form-input.form-input-rowRev {
+  flex-direction: row-reverse;
+}
+.form-input.form-input-colRev {
+  flex-direction: column;
+}
+
+/* CHECKBOX */
+.form-input.form-input-checkbox {
+  justify-content: end;
+}
+.form-input.form-input-checkbox input {
+  width: 20px;
+  margin-right: 4px;
+}
+.form-input.form-input-checkbox label {
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
