@@ -1,3 +1,3 @@
 module.exports = {
-  secret: "gark-secret-key", //TODO: change later
+  secret: process.env.MY_SECRET, //TODO: change later
 };

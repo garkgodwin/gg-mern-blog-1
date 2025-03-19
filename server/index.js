@@ -1,8 +1,17 @@
 const express = require("express");
+require("dotenv").config();
 const cors = require("cors");
 const helmet = require("helmet");
 const cookieSession = require("cookie-session");
 const mongooseErrorHandler = require("./app/middlewares/mongoErrorHandler");
+
+const {
+  createAdminOnStart,
+} = require("./app/controllers/auth.controller");
+const {
+  createCategoryOnStart,
+  createTagOnStart,
+} = require("./app/controllers/category-tags.controller");
 
 const app = express();
 app.use(helmet());
@@ -27,8 +36,13 @@ app
   .use(
     cookieSession({
       name: "gark-session",
-      keys: ["COOKIE_SECRET"], // should use as secret environment variable
+      keys: [
+        process.env.MY_SECRET_COOKIE_1,
+        process.env.MY_SECRET_COOKIE_2,
+      ], // should use as secret environment variable
       httpOnly: true,
+      sameSite: process.env.MY_COOKIE_SAME_SITE_DEV, //TODO: change to none in PROD if cross domain and https
+      secure: false, //TODO: set to true in production with HTTPS
     })
   );
 
@@ -39,13 +53,6 @@ app.get("/", (req, res) => {
 
 // db connection
 const db = require("./app/models");
-const {
-  createAdminOnStart,
-} = require("./app/controllers/auth.controller");
-const {
-  createCategoryOnStart,
-  createTagOnStart,
-} = require("./app/controllers/category-tags.controller");
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
@@ -78,7 +85,7 @@ createTagOnStart();
 app.use(mongooseErrorHandler);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
