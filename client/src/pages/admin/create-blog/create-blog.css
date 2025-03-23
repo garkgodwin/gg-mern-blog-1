@@ -105,13 +105,23 @@
 }
 
 /* BLOG CONTENT */
-.form-blog-content-sections {
-  padding: 0 24px;
+.blog-content-fields {
+  border: none;
 }
-.form-blog-content-sections:first-child {
-  margin-top: 0 !important;
-}
-.form-blog-content button {
-  margin-top: 8px;
+.blog-content-fields button {
+  justify-self: flex-end;
+  align-self: flex-end;
   background-color: var(--primary-color);
+  width: auto;
+}
+
+.blog-content-field {
+  justify-content: center;
+}
+.blog-content-field label {
+  width: 140px;
+}
+.blog-content-field input,
+.blog-content-field textarea {
+  flex: 1 !important;
 }

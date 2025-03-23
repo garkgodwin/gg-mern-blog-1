@@ -1,25 +1,27 @@
 import { useEffect, useState } from "react";
 import DOMPurify from "dompurify";
 import "./create-blog.css";
-
-import Page from "../../../containers/page/Page";
-import Form from "./../../../containers/form/Form";
-import FormFields from "./../../../containers/form/FormFields";
-import FormActions from "./../../../containers/form/FormActions";
-import FormButton from "./../../../components/buttons/FormButton";
-import FormInput from "./../../../components/inputs/FormInput";
 import { createBlogIds } from "../../../utils/formIds";
-import FlexRow from "./../../../containers/flex/FlexRow";
-import FlexCol from "./../../../containers/flex/FlexCol";
-import AddTags from "./BlogTags";
-import BlogCategories from "./BlogCategories";
+
 import {
   sanitizeArray,
   sanitizeObject,
 } from "./../../../utils/sanitize";
 import { useDispatch } from "react-redux";
 import { createBlogThunk } from "./../../../features/blogs/blogSlice";
-import BlogContent from "./BlogContent";
+
+import Page from "../../../containers/page/Page";
+import Form from "./../../../containers/form/Form";
+import FormFields from "./../../../containers/form/FormFields";
+import FormActions from "./../../../containers/form/FormActions";
+import FormButton from "./../../../components/buttons/FormButton";
+import FormField from "../../../containers/form/FormField";
+import Label from "./../../../components/inputs/Label";
+import InputText from "../../../components/inputs/InputText";
+import AddTags from "./BlogTags";
+import BlogCategories from "./BlogCategories";
+import BlogContentFields from "./BlogContentFields";
+import Flex from "../../../containers/flex/Flex";
 
 const initialState = {
   title: "",
@@ -177,54 +179,48 @@ const CreateBlog = () => {
 
   return (
     <Page>
-      <Form handleSubmit={handleSubmit} width="100">
+      <Form
+        handleSubmit={handleSubmit}
+        header="Some form"
+        desc="Some description"
+      >
         <FormFields>
-          <FlexRow>
-            <FormInput
-              id={createBlogIds.TITLE}
-              label="Title"
-              required={true}
+          <FormField>
+            <Label htmlFor="create-blog-title">Title</Label>
+            <InputText
+              id="create-blog-title"
+              type="text"
               value={formData.title}
-              handleChange={handleChange}
+              handleChange={(e) =>
+                setFormData({
+                  ...formData,
+                  title: e.target.value,
+                })
+              }
             />
-            <FormInput
-              id={createBlogIds.SLUG}
-              required={true}
-              label="Slug (3 to 6 words. Short, meaningful, and easy to read.)"
+          </FormField>
+          <FormField>
+            <Label htmlFor="create-blog-slug">
+              Slug (3 to 6 words. Short, meaningful, and easy to
+              read.)
+            </Label>
+            <InputText
+              id="create-blog-slug"
+              type="text"
               value={formData.slug}
-              handleChange={handleChange}
+              handleChange={(e) =>
+                setFormData({
+                  ...formData,
+                  slug: e.target.value,
+                })
+              }
             />
-          </FlexRow>
-          <BlogContent
+          </FormField>
+          <BlogContentFields
             content={formData.content}
             handleChangeContent={handleChangeContent}
           />
-          <FormInput
-            id={createBlogIds.SUMMARY}
-            required={true}
-            label="Summary"
-            value={formData.summary}
-            handleChange={handleChange}
-          />
-          <FormInput
-            id={createBlogIds.IMAGE}
-            required={true}
-            label="Image"
-            type="file"
-            value={formData.coverImage}
-            handleChange={handleChangeImage}
-            fileInfo={fileInfo}
-          />
-          <AddTags
-            tags={formData.tags}
-            handleUpdateTags={handleUpdateTags}
-          />
-          <BlogCategories
-            categories={formData.categories}
-            handleUpdateCategories={handleUpdateCategories}
-          />
         </FormFields>
-
         <FormActions flow="row">
           <FormButton
             type="reset"

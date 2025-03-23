@@ -1,18 +1,31 @@
-.box {
+.flex-box {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 16px;
 }
-.box.box-row {
+.flex-box.flex-box-row {
   flex-direction: row;
+  flex-wrap: wrap;
 }
-.box.box-row.box-row-reverse {
+.flex-box.flex-box-row.flex-box-row-reverse {
   flex-direction: row-reverse;
 }
-.box.box-col {
+.flex-box.flex-box-col {
   flex-direction: column;
+  gap: 4px;
 }
-.box.box-col.box-col-reverse {
+.flex-box.flex-box-col.flex-box-col-reverse {
   flex-direction: column-reverse;
 }
+
+.flex-box-row.flex-basis-auto > .flex-box {
+  flex-basis: inherit;
+  flex: 1;
+}
+.flex-box-col.flex-basis-auto > .flex-box {
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+/* SPECIFICS */

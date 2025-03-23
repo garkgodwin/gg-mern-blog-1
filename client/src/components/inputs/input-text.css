@@ -1,0 +1,14 @@
+.input-text,
+.input-textarea {
+  border: none;
+  outline: none;
+  padding: 4px 8px;
+  letter-spacing: 1.25px;
+  border-bottom: 1px solid var(--primary-color);
+  background-color: inherit;
+}
+
+.input-textarea {
+  resize: vertical;
+  min-height: 100px;
+}

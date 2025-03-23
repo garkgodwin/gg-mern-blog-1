@@ -1,7 +1,7 @@
 import React from "react";
 import Flex from "../flex/Flex";
 
-const FormFields = ({
+const FormField = ({
   flow = "col",
   flexBasis = "auto",
   className = "",
@@ -11,11 +11,11 @@ const FormFields = ({
     <Flex
       flow={flow}
       flexBasis={flexBasis}
-      className={`form-fields form-fields-${className}`}
+      className={`form-field ${className}`}
     >
       {children}
     </Flex>
   );
 };
 
-export default FormFields;
+export default FormField;

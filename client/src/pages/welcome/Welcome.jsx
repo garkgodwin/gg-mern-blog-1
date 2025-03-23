@@ -7,7 +7,7 @@ import Form from "../../containers/form/Form";
 import FormFields from "./../../containers/form/FormFields";
 import FormActions from "./../../containers/form/FormActions";
 import FormButton from "../../components/buttons/FormButton";
-import FormInput from "./../../components/inputs/FormInput";
+import FormInput from "./../../components/inputs/Input";
 //state
 import { loginUser } from "./../../features/auth/authSlice";
 

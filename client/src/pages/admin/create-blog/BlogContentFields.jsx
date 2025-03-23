@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import FormInput from "../../../components/inputs/FormInput";
+import FormInput from "../../../components/inputs/Input";
+import FlexCol from "../../../containers/flex/FlexCol";
+import FlexRow from "../../../containers/flex/FlexRow";
+import FormField from "../../../containers/form/FormField";
+import Label from "../../../components/inputs/Label";
+import InputText from "../../../components/inputs/InputText";
+import InputTextArea from "../../../components/inputs/InputTextArea";
+import Flex from "../../../containers/flex/Flex";
 
 const BlogContent = ({ content, handleChangeContent }) => {
   const [xContent, setXContent] = useState({
@@ -34,26 +41,23 @@ const BlogContent = ({ content, handleChangeContent }) => {
   useEffect(() => {
     handleChangeContent(xContent);
   }, [xContent]);
+
   return (
-    <div className="form-blog-content">
-      <label>Content</label>
-      <FormInput
-        id="form-blog-content-introduction"
-        required={true}
-        label="Introduction"
-        type="textarea"
-        value={content.introduction}
-        handleChange={handleChangeIntro}
-      />
-      <div className="form-blog-content-sections">
-        <label>Sections</label>
-        {xContent.sections.map((sect, i) => {
-          return (
-            <div key={i} className="form-blog-content-section">
-              <FormInput
+    <FormField className="blog-content-fields">
+      <Label htmlFor="">Content</Label>
+
+      {xContent.sections.map((sect, i) => {
+        return (
+          <div key={i} className="blog-content-field">
+            <Flex flow="row" flexBasis="auto">
+              <Label
+                htmlFor={`form-blog-content-section-text-${i}`}
+                isMain={false}
+              >
+                Section {i + 1} Header:
+              </Label>
+              <InputText
                 id={`form-blog-content-section-text-${i}`}
-                label="Header"
-                type="text"
                 value={sect.heading}
                 handleChange={(e) => {
                   let newSections = xContent.sections;
@@ -68,10 +72,16 @@ const BlogContent = ({ content, handleChangeContent }) => {
                   });
                 }}
               />
-              <FormInput
+            </Flex>
+            <Flex flow="row">
+              <Label
+                htmlFor={`form-blog-content-section-text-${i}`}
+                isMain={false}
+              >
+                Section {i + 1} Body:
+              </Label>
+              <InputTextArea
                 id={`form-blog-content-section-textarea-${i}`}
-                label="Body"
-                type="textarea"
                 value={sect.body}
                 handleChange={(e) => {
                   let newSections = xContent.sections;
@@ -86,20 +96,12 @@ const BlogContent = ({ content, handleChangeContent }) => {
                   });
                 }}
               />
-            </div>
-          );
-        })}
-        <button onClick={handleAddNewSection}>Add New Section</button>
-      </div>
-      <FormInput
-        id="form-blog-content-conclusion"
-        required={true}
-        label="Conclusion"
-        type="textarea"
-        value={content.conclusion}
-        handleChange={handleChangeConc}
-      />
-    </div>
+            </Flex>
+          </div>
+        );
+      })}
+      <button onClick={handleAddNewSection}>Add New Section</button>
+    </FormField>
   );
 };
 
