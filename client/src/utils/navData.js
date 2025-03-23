@@ -10,6 +10,6 @@ export const LINKS = {
 export const ADMIN_LINKS = {
   //AUTHED
   DASHBOARD: "/",
-  ALL_POSTS: "/view-all-posts",
-  CREATE_POST: "/create-post",
+  BLOGS: "/blogs",
+  CREATE_BLOG: "/create-blog",
 };

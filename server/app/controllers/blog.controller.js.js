@@ -1,43 +1,38 @@
 const db = require("../models");
-const Post = db.posts;
-const Category = db.categories;
+const Blog = db.blogs;
 const Tag = db.tags;
 const ROLES = db.ROLES;
+const categories = require("../data/categories");
 
-/*
-  createPost is owned by the following
-  - admin > basically can do anything
-  - author > yes, the only purpose of author
-*/
+exports.getCategories = async (req, res, next) => {
+  return res.status(200).send({
+    categories: categories,
+  });
+};
 
-exports.createPost = async (req, res, next) => {
+exports.createBlog = async (req, res, next) => {
   // Create a Post
   const {
     title, // USER INPUT
     slug, // USER INPUT auto generated or depends on user input
     //author, // SYSTEM INPUT depends on who is currently logged in
     content, // USER INPUT
-    category, // USER INPUT - will be category id, SYSTEM INPUT if category does not exist, it will need to be created in db
+    summary, //A brief preview or overview of the post content.
+    categories, // USER INPUT - will be category id, SYSTEM INPUT if category does not exist, it will need to be created in db
     tags, // USER INPUT - will tags ids, SYSTEM INPUT if tag/s does not exist, it will need to be created in db
-    featuredImage, // SYSTEM INPUT url of the image, so would need to be created in db
+    coverImage, // SYSTEM INPUT url of the image, so would need to be created in db
     // publishDate, // EMPTY will be empty when creating post, mods will need to allow
     //status, // SYTEM INPUT status default is draft, so no need from inpuit
     //readTime, // SYSTEM INPUT calculate the number of words divided by 200
-    seoTitle, //  USER INPUT what will be seen in title tag(from FRONT END, auto populate/limits to recommended number of words or user INPUT)
-    metaDescription, // USER INPUT
+    //TODO: add this: seoTitle, //  USER INPUT what will be seen in title tag(from FRONT END, auto populate/limits to recommended number of words or user INPUT)
+    //TODO: add this metaDescription, // USER INPUT
   } = req.body;
 
-  //TODO: VALIDATE
-  // check if category exist
-  const catExist = await Category.findOne({
-    name: category,
+  return res.status(200).send({
+    message: "Server recieved",
+    data: req.body,
   });
-  if (!catExist) {
-    return res.status(200).send({
-      message:
-        "The website cannot process post as category does not exist.",
-    });
-  }
+
   // populate only to tags that exist
   const tagIds = [];
   for (let i = 0; i < tags.length; i++) {

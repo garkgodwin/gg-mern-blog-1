@@ -1,5 +1,5 @@
 const { authJwt, mongooseErrorHandler } = require("../middlewares");
-const controller = require("../controllers/post.controller");
+const controller = require("../controllers/blog.controller.js");
 
 module.exports = function (app) {
   var router = require("express").Router();
@@ -11,10 +11,11 @@ module.exports = function (app) {
     );
     next();
   });
+  router.get("/categories", controller.getCategories);
   router.post(
     "/",
     [authJwt.verifyToken, authJwt.isAuthorOrAdmin],
-    controller.createPost
+    controller.createBlog
   );
   router.put(
     "/:id/title-and-content",
@@ -29,5 +30,5 @@ module.exports = function (app) {
   router.get("/", controller.getAllPosts);
   router.get("/:id", controller.getPostById);
 
-  app.use("/api/posts", router);
+  app.use("/api/blogs", router);
 };

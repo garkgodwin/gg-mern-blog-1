@@ -3,6 +3,7 @@ import "./sidebar.css";
 import { NavLink } from "react-router";
 import { logoutUser } from "../../features/auth/authSlice";
 import { useDispatch } from "react-redux";
+import { ADMIN_LINKS } from "../../utils/navData";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -16,21 +17,21 @@ const Sidebar = () => {
       <div className="sidebar-logo">MyBlog</div>
       <nav className="sidebar-nav">
         <NavLink
-          to="/"
+          to={ADMIN_LINKS.DASHBOARD}
           className="sidebar-link"
           activeclassname="active"
         >
           Dashboard
         </NavLink>
         <NavLink
-          to="/blogs"
+          to={ADMIN_LINKS.BLOGS}
           className="sidebar-link"
           activeclassname="active"
         >
           Blogs
         </NavLink>
         <NavLink
-          to="/create-blogs"
+          to={ADMIN_LINKS.CREATE_BLOG}
           className="sidebar-link"
           activeclassname="active"
         >

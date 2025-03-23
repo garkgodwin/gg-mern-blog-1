@@ -19,12 +19,17 @@ module.exports = (mongoose) => {
         ],
         conclusion: { type: String, required: true },
       },
-      category: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "category",
+      categories: {
+        recipeType: { type: String },
+        preference: { type: String },
+        difficulty: { type: String },
+        method: { type: String },
+        cuisine: { type: String },
+        theme: { type: String },
+        blogType: { type: String },
       },
-      tags: [{ type: mongoose.Schema.Types.ObjectId, ref: "tag" }], // probably be seen in a list tag (li)
-      featuredImage: { type: String }, // Image URL
+      tags: [String],
+      coverImage: { type: String }, // Image URL
       publishDate: { type: Date, default: Date.now },
       status: {
         type: String,
@@ -45,6 +50,6 @@ module.exports = (mongoose) => {
     return object;
   });
 
-  const Post = mongoose.model("post", schema);
-  return Post;
+  const Blog = mongoose.model("blog", schema);
+  return Blog;
 };

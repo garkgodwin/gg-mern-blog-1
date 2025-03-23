@@ -1,0 +1,19 @@
+.form-selection {
+  width: auto;
+  border: none;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0);
+  border-bottom: 1px solid var(--primary-color);
+  padding: 4px;
+}
+.form-selection option {
+  width: auto;
+  padding: 4px;
+}
+
+select.form-selection:focus {
+  border: 1px solid var(--primary-color) !important;
+}
+.form-selection::selection {
+  border: 1px solid var(--primary-color) !important;
+}

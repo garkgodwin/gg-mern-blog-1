@@ -1,9 +1,21 @@
 import React from "react";
 import "./button.css";
 
-const FormButton = ({ children }) => {
+/*
+  type -> submit, reset
+*/
+const FormButton = ({
+  type = "submit",
+  outlined = false,
+  handleClick,
+  children,
+}) => {
   return (
-    <button className="frm-btn" type="submit">
+    <button
+      onClick={handleClick}
+      className={`frm-btn ${outlined ? "frm-btn-outlined" : ""}`}
+      type={type}
+    >
       {children}
     </button>
   );

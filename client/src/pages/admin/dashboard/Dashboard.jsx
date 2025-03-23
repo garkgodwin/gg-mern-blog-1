@@ -1,5 +1,6 @@
 import React from "react";
 import "./Dashboard.css";
+import Page from "./../../../containers/page/Page";
 
 const Dashboard = () => {
   const stats = [
@@ -15,7 +16,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="dashboard-container">
+    <Page>
       <h1 className="dashboard-title">Welcome back, Admin!</h1>
 
       <div className="dashboard-stats">
@@ -48,7 +49,7 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
-    </div>
+    </Page>
   );
 };
 

@@ -10,7 +10,7 @@ db.tutorials = require("./tutorial.model.js")(mongoose);
 
 db.users = require("./user.model.js")(mongoose);
 
-db.posts = require("./post.model.js")(mongoose);
+db.blogs = require("./blog.model.js")(mongoose);
 db.comments = require("./comment.model.js")(mongoose);
 db.tags = require("./tag.model.js")(mongoose);
 db.categories = require("./category.model.js")(mongoose);

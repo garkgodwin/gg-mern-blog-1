@@ -23,52 +23,24 @@
   margin-bottom: 24px;
 }
 
-/* FORM INPUT */
-.form .form-input {
+/* FORM ACTIONS */
+.form-actions {
+  height: auto;
   display: flex;
-  flex-direction: column;
-  margin-top: 8px;
-  min-height: 36px;
+  flex-direction: column !important;
+  gap: 16px;
+  margin-top: 24px;
 }
-
-.form-input label {
-  font-size: 16px;
-  color: var(--system-gray-9);
-}
-.form-input input {
-  font-size: 16px;
-  color: var(--system-gray-10);
-  border: none;
-  outline: none;
-  border-bottom: 1px solid var(--primary-color);
-  padding: 4px;
-}
-
-/* FLEX DIRECTIONS */
-.form-input.form-input-col {
+.form-actions.form-actions-col {
   flex-direction: column;
 }
-.form-input.form-input-row {
-  flex-direction: row;
-}
-.form-input.form-input-rowRev {
-  flex-direction: row-reverse;
-}
-.form-input.form-input-colRev {
-  flex-direction: column;
+div.form-actions.form-actions-row {
+  flex-direction: row !important;
 }
 
-/* CHECKBOX */
-.form-input.form-input-checkbox {
-  justify-content: end;
-}
-.form-input.form-input-checkbox input {
-  width: 20px;
-  margin-right: 4px;
-}
-.form-input.form-input-checkbox label {
-  font-size: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* POST PAGE */
+.form-box-w100 {
+  width: 90%;
+  max-width: 90%;
+  box-shadow: none;
 }

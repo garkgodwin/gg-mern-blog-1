@@ -3,9 +3,19 @@
   height: 40px;
   font-size: 20px;
   width: 100%;
-  margin-top: 24px;
+  transition: all 0.2s linear;
 }
 
 .frm-btn:hover {
   background-color: var(--highlight-color);
+}
+
+.frm-btn.frm-btn-outlined {
+  background-color: inherit;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+.frm-btn.frm-btn-outlined:hover {
+  color: var(--highlight-color);
+  border-color: var(--highlight-color);
 }

@@ -78,7 +78,7 @@ app.use((err, req, res, next) => {
 require("./app/routes/tutorial.routes")(app);
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
-require("./app/routes/post.routes")(app);
+require("./app/routes/blog.routes")(app);
 //?? DEFAULTS
 createAdminOnStart();
 createCategoryOnStart();

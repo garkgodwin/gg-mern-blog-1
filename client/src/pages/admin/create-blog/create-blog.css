@@ -1,0 +1,118 @@
+/* BLOG TAGS */
+.blog-tags {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+.blog-tags .tag-input {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-tags .tag-input .tag-input-box {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 4px;
+}
+.blog-tags .tag-input input {
+  width: 75%;
+}
+.blog-tags .tag-input button {
+  width: 25%;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-tags button {
+  background-color: var(--primary-color);
+  margin-top: 4px;
+  width: 100px;
+}
+
+/* TAG LIST */
+.tag-list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+.tag-list li {
+  cursor: pointer;
+  width: auto;
+  padding: 4px;
+  background-color: var(--primary-color);
+  color: var(--system-gray-0);
+  font-size: 12px;
+  letter-spacing: 1.3px;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  overflow: hidden;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.tag-list li .li-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.tag-list li button {
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: inherit;
+}
+.tag-list li:hover {
+  background-color: var(--highlight-color);
+}
+.tag-list li button:hover {
+  color: var(--secondary-color);
+}
+.tag-list-item.tli-selected {
+  background-color: var(--highlight-color);
+}
+
+/* BLOG Categories */
+.blog-categories {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+.blog-categories .blog-categories-box {
+  gap: 12px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.blog-category {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-group-name {
+  font-size: 14px;
+}
+
+/* BLOG CONTENT */
+.form-blog-content {
+}
+
+.form-blog-content-sections {
+  padding: 0 24px;
+}
+.form-blog-content-sections:first-child {
+  margin-top: 0 !important;
+}
+.form-blog-content button {
+  margin-top: 8px;
+  background-color: var(--primary-color);
+}
