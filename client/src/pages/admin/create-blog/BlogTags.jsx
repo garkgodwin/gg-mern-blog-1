@@ -45,9 +45,9 @@ const BlogTags = ({ tags, handleUpdateTags }) => {
     if (exist) {
       setErr("You already added this tag");
     } else {
-      const oldTags = xTags;
-      oldTags[toUpdate] = text;
-      setXTags(oldTags);
+      setXTags((prev) =>
+        prev.map((item, index) => (index === toUpdate ? text : item))
+      );
     }
     setText("");
     setBtnAddText("Add");
@@ -62,12 +62,11 @@ const BlogTags = ({ tags, handleUpdateTags }) => {
     setBtnAddText("Add");
     setToUpdate();
     setText("");
-    const oldTags = xTags;
-    oldTags.splice(index, 1);
-    setXTags(oldTags);
+    setXTags((prev) => prev.filter((_, i) => i !== index));
   };
 
   useEffect(() => {
+    console.log(xTags);
     handleUpdateTags(xTags);
   }, [xTags]);
   return (
@@ -89,7 +88,7 @@ const BlogTags = ({ tags, handleUpdateTags }) => {
         <span className="tag-input-err">{err}</span>
       </div>
       <ul className="tag-list">
-        {tags.map((tag, i) => {
+        {xTags.map((tag, i) => {
           return (
             <li
               key={i}

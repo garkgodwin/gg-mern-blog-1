@@ -56,13 +56,15 @@ const BlogContent = ({ content, handleChangeContent }) => {
                 type="text"
                 value={sect.heading}
                 handleChange={(e) => {
-                  let newSection = xContent.sections;
-                  newSection = newSection.map((item, index) =>
-                    index === i ? e.target.value : item
-                  );
+                  let newSections = xContent.sections;
+                  newSections = newSections.map((item, index) => {
+                    if (index === i)
+                      return { ...item, heading: e.target.value };
+                    else return item;
+                  });
                   setXContent({
                     ...xContent,
-                    sections: newSection,
+                    sections: newSections,
                   });
                 }}
               />
@@ -71,6 +73,18 @@ const BlogContent = ({ content, handleChangeContent }) => {
                 label="Body"
                 type="textarea"
                 value={sect.body}
+                handleChange={(e) => {
+                  let newSections = xContent.sections;
+                  newSections = newSections.map((item, index) => {
+                    if (index === i)
+                      return { ...item, body: e.target.value };
+                    else return item;
+                  });
+                  setXContent({
+                    ...xContent,
+                    sections: newSections,
+                  });
+                }}
               />
             </div>
           );
