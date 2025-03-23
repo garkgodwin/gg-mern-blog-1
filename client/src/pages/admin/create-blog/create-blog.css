@@ -96,6 +96,8 @@
 .blog-category {
   display: flex;
   flex-direction: column;
+  flex-basis: auto;
+  flex: 1;
 }
 
 .blog-group-name {
