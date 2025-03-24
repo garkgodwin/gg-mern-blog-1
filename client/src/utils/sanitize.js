@@ -8,7 +8,13 @@ const sanitizeInput = (input) => {
 };
 
 export const sanitizeArray = (texts) => {
-  return texts.map((text) => DOMPurify.sanitize(text));
+  console.log(texts);
+  return texts.map((text) => {
+    if (typeof text === "object") {
+      return sanitizeObject(text);
+    }
+    return DOMPurify.sanitize(text);
+  });
 };
 
 export const sanitizeObject = (texts) => {

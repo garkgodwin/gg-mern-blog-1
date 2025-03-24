@@ -1,9 +1,21 @@
 .frm-btn {
   background-color: var(--primary-color);
-  height: 40px;
-  font-size: 20px;
   width: 100%;
   transition: all 0.2s linear;
+  margin: 0;
+}
+
+.frm-btn.frm-btn-sm {
+  font-size: 16px;
+  padding: 4px 8px;
+}
+.frm-btn.frm-btn-md {
+  font-size: 16px;
+  padding: 6px 8px;
+}
+.frm-btn.frm-btn-lg {
+  font-size: 24px;
+  padding: 8px 8px;
 }
 
 .frm-btn:hover {

@@ -5,11 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Page from "../../containers/page/Page";
 import Form from "../../containers/form/Form";
 import FormFields from "./../../containers/form/FormFields";
+import FormField from "./../../containers/form/FormField";
 import FormActions from "./../../containers/form/FormActions";
 import FormButton from "../../components/buttons/FormButton";
-import FormInput from "./../../components/inputs/Input";
+import InputText from "./../../components/inputs/InputText";
+import InputCheckbox from "./../../components/inputs/InputCheckbox";
+
 //state
 import { loginUser } from "./../../features/auth/authSlice";
+import Label from "./../../components/inputs/Label";
 
 const Welcome = () => {
   const dispatch = useDispatch();
@@ -31,49 +35,58 @@ const Welcome = () => {
   return (
     <Page>
       <Form
+        className="form-login"
         header="Welcome!"
         desc="Please enter your credentials"
         handleSubmit={onSubmit}
       >
         <FormFields>
-          <FormInput
-            id="loginUsername"
-            label="username"
-            type="text"
-            required={true}
-            value={formData.username}
-            handleChange={(e) => {
-              setFormData({
-                ...formData,
-                username: e.target.value,
-              });
-            }}
-          />
-          <FormInput
-            id="loginPassword"
-            label="password"
-            type={showPassword ? "text" : "password"}
-            required={true}
-            value={formData.password}
-            handleChange={(e) => {
-              setFormData({
-                ...formData,
-                password: e.target.value,
-              });
-            }}
-          />
+          <FormField>
+            <Label>username</Label>
+            <InputText
+              id="loginUsername"
+              type="text"
+              required={true}
+              value={formData.username}
+              handleChange={(e) => {
+                setFormData({
+                  ...formData,
+                  username: e.target.value,
+                });
+              }}
+            />
+          </FormField>
+          <FormField>
+            <Label>password</Label>
+            <InputText
+              id="loginPassword"
+              label="password"
+              type={showPassword ? "text" : "password"}
+              required={true}
+              value={formData.password}
+              handleChange={(e) => {
+                setFormData({
+                  ...formData,
+                  password: e.target.value,
+                });
+              }}
+            />
+          </FormField>
         </FormFields>
         <FormActions>
-          <FormInput
-            id="showPassword"
-            label="Show password"
-            type="checkbox"
-            flexDirection="rowRev"
-            value={showPassword}
-            handleChange={(e) => {
-              setShowPassword(!showPassword);
-            }}
-          />
+          <FormField flow="row" justifyContent="end">
+            <InputCheckbox
+              id="showPassword"
+              type="checkbox"
+              flexDirection="rowRev"
+              value={showPassword}
+              handleChange={(e) => {
+                setShowPassword(!showPassword);
+              }}
+            />
+            <Label htmlFor="showPassword">Show Password</Label>
+          </FormField>
+
           <FormButton>Login</FormButton>
         </FormActions>
       </Form>

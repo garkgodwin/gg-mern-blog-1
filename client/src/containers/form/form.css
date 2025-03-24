@@ -31,6 +31,7 @@
 .form-fields {
   margin: 0 !important;
 }
+/* FORM - FIELD */
 .form-field {
   padding: 4px;
   margin: 0 !important;
@@ -39,10 +40,28 @@
   /*! gap = 0 ---- gap removed - formfield is using Flex container which has a default gap of 8px for flow="row" */
   gap: 0 !important;
 }
+.form-field.form-field-justify-start {
+  justify-content: flex-start;
+}
+.form-field.form-field-justify-end {
+  justify-content: flex-end;
+}
 .form-field > * {
   width: 100%;
 }
+.form-field label {
+  width: auto;
+}
 
+.form-field.form-field-checkbox {
+  position: relative;
+}
+.form-field input[type="checkbox"] {
+  left: 0;
+  flex: 0;
+  align-self: center;
+  margin: 0 8px;
+}
 /* FORM ACTIONS */
 .form-actions {
   height: auto;

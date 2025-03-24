@@ -22,11 +22,17 @@ import AddTags from "./BlogTags";
 import BlogCategories from "./BlogCategories";
 import BlogContentFields from "./BlogContentFields";
 import Flex from "../../../containers/flex/Flex";
+import BlogTags from "./BlogTags";
 
 const initialState = {
   title: "",
   slug: "",
-  content: "",
+  content: [
+    {
+      heading: "",
+      body: "",
+    },
+  ],
   summary: "",
   coverImage: null, //TODO: later
   tags: [],
@@ -52,17 +58,19 @@ const CreateBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let sanitizedFormData = formData;
+    console.log(formData);
     sanitizedFormData = {
       ...sanitizedFormData,
       title: sanitize(formData.title),
       slug: sanitize(formData.slug),
-      content: sanitize(formData.content),
+      content: sanitizeArray(formData.content),
       summary: sanitize(formData.summary),
       tags: sanitizeArray(formData.tags),
       categories: sanitizeObject(formData.categories),
     };
-    const result = await dispatch(createBlogThunk(sanitizedFormData));
-    console.log(result);
+    console.log(sanitizedFormData);
+    // const result = await dispatch(createBlogThunk(sanitizedFormData));
+    // console.log(result);
   };
 
   // handle change texts?
@@ -219,6 +227,10 @@ const CreateBlog = () => {
           <BlogContentFields
             content={formData.content}
             handleChangeContent={handleChangeContent}
+          />
+          <BlogTags
+            tags={formData.tags}
+            handleUpdateTags={handleUpdateTags}
           />
         </FormFields>
         <FormActions flow="row">

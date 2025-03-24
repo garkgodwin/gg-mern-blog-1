@@ -1,52 +1,45 @@
 /* BLOG TAGS */
-.blog-tags {
+.form-field-blog-tags {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: auto;
+  align-items: center;
+}
+.form-field-blog-tags > .flex-box:nth-child(1) {
+  flex-grow: 0 !important;
+  flex-shrink: 1 !important;
+  width: auto !important;
 }
 
-.blog-tags .tag-input {
-  width: 200px;
+.form-field-blog-tags button.btn-add-tag {
+  flex-shrink: 1;
+  flex-grow: 0;
+  width: auto !important;
+  justify-content: center;
+  align-items: center;
   display: flex;
-  flex-direction: column;
+  margin-left: 8px;
 }
 
-.blog-tags .tag-input .tag-input-box {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  gap: 4px;
-}
-.blog-tags .tag-input input {
-  width: 75%;
-}
-.blog-tags .tag-input button {
-  width: 25%;
-  padding: 0;
-  margin: 0;
-}
-
-.blog-tags button {
-  background-color: var(--primary-color);
-  margin-top: 4px;
-  width: 100px;
+.form-field-blog-tags input {
+  flex-shrink: 1;
+  flex-grow: 0;
+  width: 100px !important;
 }
 
 /* TAG LIST */
-.tag-list {
+ul.tag-list {
+  width: 100% !important;
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin-top: 8px;
+  min-height: 24px;
 }
 .tag-list li {
   cursor: pointer;
   width: auto;
-  padding: 4px;
   background-color: var(--primary-color);
   color: var(--system-gray-0);
+  padding: 0 4px;
   font-size: 12px;
   letter-spacing: 1.3px;
   transition: all 0.2s ease-in-out;

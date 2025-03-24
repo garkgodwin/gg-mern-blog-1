@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from "react";
+import FormField from "./../../../containers/form/FormField";
+import Flex from "../../../containers/flex/Flex";
+import Label from "./../../../components/inputs/Label";
+import InputText from "../../../components/inputs/InputText";
+import FormButton from "../../../components/buttons/FormButton";
 const BlogTags = ({ tags, handleUpdateTags }) => {
   const [err, setErr] = useState("");
   const [xTags, setXTags] = useState([]);
@@ -70,24 +75,23 @@ const BlogTags = ({ tags, handleUpdateTags }) => {
     handleUpdateTags(xTags);
   }, [xTags]);
   return (
-    <div className="blog-tags">
-      <div className="tag-input">
-        <label>Tags</label>
-        <div className="tag-input-box">
-          <input
-            type="text"
-            value={text}
-            onChange={(e) => {
-              setText(e.target.value);
-            }}
-          />
-          <button className="btn-add-tag" onClick={handleAddClick}>
-            {btnAddText}
-          </button>
-        </div>
-        <span className="tag-input-err">{err}</span>
-      </div>
-      <ul className="tag-list">
+    <FormField flow="row" className="form-field-blog-tags">
+      <Label>Tags: </Label>
+      <InputText
+        type="text"
+        value={text}
+        handleChange={(e) => {
+          setText(e.target.value);
+        }}
+      />
+      <FormButton
+        size="sm"
+        className="btn-add-tag"
+        handleClick={handleAddClick}
+      >
+        {btnAddText}
+      </FormButton>
+      <Flex flow="row" type="ul" className="tag-list">
         {xTags.map((tag, i) => {
           return (
             <li
@@ -116,8 +120,9 @@ const BlogTags = ({ tags, handleUpdateTags }) => {
             </li>
           );
         })}
-      </ul>
-    </div>
+      </Flex>
+      <span className="tag-input-err">{err}</span>
+    </FormField>
   );
 };
 
