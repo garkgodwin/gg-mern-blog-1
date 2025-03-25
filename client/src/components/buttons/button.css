@@ -31,3 +31,15 @@
   color: var(--highlight-color);
   border-color: var(--highlight-color);
 }
+
+/* DISABLED */
+.frm-btn:disabled {
+  background-color: var(--system-gray-6);
+  color: var(--system-gray-3);
+  border-color: var(--system-gray-6);
+}
+.frm-btn:disabled:hover {
+  background-color: var(--system-gray-7);
+  color: var(--system-gray-3);
+  border-color: var(--system-gray-7);
+}
