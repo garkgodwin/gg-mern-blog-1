@@ -82,7 +82,7 @@ const CreateBlog = () => {
               type="text"
               value={data.title}
               handleChange={(e) => {
-                data.updateField("title", e.target.value);
+                blog.updateField("title", e.target.value);
               }}
             />
           </FormField>
@@ -96,7 +96,7 @@ const CreateBlog = () => {
               type="text"
               value={data.slug}
               handleChange={(e) => {
-                data.updateField("slug", e.target.value);
+                blog.updateField("slug", e.target.value);
               }}
             />
           </FormField>
