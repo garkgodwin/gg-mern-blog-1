@@ -6,6 +6,7 @@ import {
 } from "../utils/sanitize";
 import { useDispatch } from "react-redux";
 import { createBlogThunk } from "../features/blogs/blogSlice";
+import { uploadBlogImage } from "../api/uploadApi";
 
 const defaultData = {
   title: "",
@@ -40,6 +41,7 @@ const useBlog = (initialData = defaultData) => {
     content: "",
   });
   const [tag, setTag] = useState(initialTagState);
+  const [submitStarted, setSubmiStarted] = useState(false);
 
   const updateField = (field, value) => {
     setData((prev) => ({
@@ -56,6 +58,14 @@ const useBlog = (initialData = defaultData) => {
         [key]: value,
       },
     }));
+  };
+  //? IMAGE INFO
+  //? Only update image after the image is saved in DB
+  const updateImage = (file) => {
+    setData({
+      ...data,
+      coverImage: file,
+    });
   };
 
   //? CONTENT INFO
@@ -205,21 +215,37 @@ const useBlog = (initialData = defaultData) => {
   };
 
   const create = async () => {
-    let sanitizedData = data;
-    sanitizedData = {
-      ...sanitizedData,
-      title: sanitizeText(sanitizedData.title),
-      slug: sanitizeText(sanitizedData.slug),
-      content: sanitizeArray(sanitizedData.content),
-      summary: sanitizeText(sanitizedData.summary),
-      tags: sanitizeArray(sanitizedData.tags),
-      categories: sanitizeObject(sanitizedData.categories),
-    };
-    console.log("DATA: ", data);
-    console.log("SANITIZED: ", sanitizedData);
-    console.log("Is sanitized samedata: ", sanitizedData === data);
-    const result = await dispatch(createBlogThunk(sanitizedData));
-    console.log(result);
+    setSubmiStarted(true);
+    console.log(data);
+    const formData = new FormData();
+    formData.append("image", data.coverImage);
+    console.log(formData);
+    try {
+      const data = await uploadBlogImage(formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("Data", data);
+    } catch (err) {
+      console.log("Upload failed", err);
+    }
+    setSubmiStarted(false);
+    // let sanitizedData = data;
+    // sanitizedData = {
+    //   ...sanitizedData,
+    //   title: sanitizeText(sanitizedData.title),
+    //   slug: sanitizeText(sanitizedData.slug),
+    //   content: sanitizeArray(sanitizedData.content),
+    //   summary: sanitizeText(sanitizedData.summary),
+    //   tags: sanitizeArray(sanitizedData.tags),
+    //   categories: sanitizeObject(sanitizedData.categories),
+    // };
+    // console.log("DATA: ", data);
+    // console.log("SANITIZED: ", sanitizedData);
+    // console.log("Is sanitized samedata: ", sanitizedData === data);
+    // const result = await dispatch(createBlogThunk(sanitizedData));
+    // console.log(result);
   };
 
   return {
@@ -241,6 +267,8 @@ const useBlog = (initialData = defaultData) => {
     selectTagToUpdate,
     removeTag,
     clearTagError,
+    // image
+    updateImage,
     reset,
     create,
   };

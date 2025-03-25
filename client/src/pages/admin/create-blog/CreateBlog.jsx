@@ -19,6 +19,7 @@ import BlogContentFields from "./BlogContentFields";
 import Flex from "../../../containers/flex/Flex";
 import BlogTags from "./BlogTags";
 import useBlog from "../../../hooks/useBlog";
+import InputFile from "../../../components/inputs/InputFile";
 
 const initialState = {
   title: "",
@@ -45,8 +46,6 @@ const initialState = {
 const CreateBlog = () => {
   const blog = useBlog();
   const { data } = blog;
-  const dispatch = useDispatch();
-  const sanitize = DOMPurify.sanitize;
   const [fileInfo, setFileInfo] = useState({
     name: "",
     size: "",
@@ -98,6 +97,14 @@ const CreateBlog = () => {
               handleChange={(e) => {
                 blog.updateField("slug", e.target.value);
               }}
+            />
+          </FormField>
+          <FormField>
+            <Label htmlFor="create-blog-image">Cover Image</Label>
+            <InputFile
+              id="create-blog-image"
+              value={data.coverImage}
+              handleChange={blog.updateImage}
             />
           </FormField>
           <BlogContentFields blog={blog} />

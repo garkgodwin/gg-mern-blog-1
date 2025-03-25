@@ -4,6 +4,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const cookieSession = require("cookie-session");
 const mongooseErrorHandler = require("./app/middlewares/mongoErrorHandler");
+const fileUpload = require("express-fileupload");
 
 const {
   createAdminOnStart,
@@ -47,6 +48,16 @@ app
     })
   );
 
+app.use(
+  fileUpload({
+    useTempFiles: true, // ✅ Saves the file in a temp location before processing
+    tempFileDir: "/tmp/", // ✅ (Optional) Specify temp directory for uploads
+    limits: { fileSize: 5 * 1024 * 1024 }, // ✅ Limit file size to 5MB
+    abortOnLimit: true, // ✅ Automatically reject files exceeding size limit
+    responseOnLimit: "File size limit is 5MB", // ✅ Custom message for oversized files
+  })
+);
+
 // simple route
 app.get("/", (req, res) => {
   res.status(200).send({ message: "Welcome!" });
@@ -79,6 +90,7 @@ require("./app/routes/tutorial.routes")(app);
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/blog.routes")(app);
+require("./app/routes/upload.routes")(app);
 //?? DEFAULTS
 createAdminOnStart();
 createCategoryOnStart();
