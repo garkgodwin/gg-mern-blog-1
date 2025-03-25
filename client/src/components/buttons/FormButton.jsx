@@ -8,6 +8,7 @@ const FormButton = ({
   type = "submit",
   size = "md",
   outlined = false,
+  disabled = false,
   className = "",
   handleClick,
   children,
@@ -15,6 +16,7 @@ const FormButton = ({
   return (
     <button
       onClick={handleClick}
+      disabled={disabled}
       className={`frm-btn ${
         outlined ? "frm-btn-outlined" : ""
       } frm-btn-${size} ${className}`}

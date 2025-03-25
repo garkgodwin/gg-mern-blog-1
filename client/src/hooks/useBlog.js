@@ -41,7 +41,7 @@ const useBlog = (initialData = defaultData) => {
     content: "",
   });
   const [tag, setTag] = useState(initialTagState);
-  const [submitStarted, setSubmiStarted] = useState(false);
+  const [createStarted, setCreateStarted] = useState(false);
 
   const updateField = (field, value) => {
     setData((prev) => ({
@@ -215,7 +215,8 @@ const useBlog = (initialData = defaultData) => {
   };
 
   const create = async () => {
-    setSubmiStarted(true);
+    console.log("STARTING");
+    setCreateStarted(true);
     console.log(data);
     const formData = new FormData();
     formData.append("image", data.coverImage);
@@ -230,7 +231,7 @@ const useBlog = (initialData = defaultData) => {
     } catch (err) {
       console.log("Upload failed", err);
     }
-    setSubmiStarted(false);
+    setCreateStarted(false);
     // let sanitizedData = data;
     // sanitizedData = {
     //   ...sanitizedData,
@@ -271,6 +272,7 @@ const useBlog = (initialData = defaultData) => {
     updateImage,
     reset,
     create,
+    createStarted,
   };
 };
 

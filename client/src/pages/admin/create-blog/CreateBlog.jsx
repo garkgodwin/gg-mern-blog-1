@@ -119,7 +119,9 @@ const CreateBlog = () => {
           >
             Clear
           </FormButton>
-          <FormButton>Submit</FormButton>
+          <FormButton type="submit" disabled={blog.createStarted}>
+            Submit
+          </FormButton>
         </FormActions>
       </Form>
     </Page>
