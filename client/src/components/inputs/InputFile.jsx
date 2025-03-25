@@ -31,6 +31,11 @@ const InputFile = ({ id, value, handleChange, required = true }) => {
       document.getElementById(id).files = e.dataTransfer.files;
       setPreview(URL.createObjectURL(droppedFile)); // for preview only
       handleChange(droppedFile);
+      setFileInfo({
+        name: shortenFilename(droppedFile.name),
+        size: (droppedFile.size / 1024).toFixed(2) + " KB",
+        type: droppedFile.type,
+      });
     } else {
       // handleChange(null);
       setPreview(null);
