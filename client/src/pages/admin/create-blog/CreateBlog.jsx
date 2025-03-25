@@ -3,12 +3,7 @@ import DOMPurify from "dompurify";
 import "./create-blog.css";
 import { createBlogIds } from "../../../utils/formIds";
 
-import {
-  sanitizeArray,
-  sanitizeObject,
-} from "./../../../utils/sanitize";
 import { useDispatch } from "react-redux";
-import { createBlogThunk } from "./../../../features/blogs/blogSlice";
 
 import Page from "../../../containers/page/Page";
 import Form from "./../../../containers/form/Form";
@@ -23,6 +18,7 @@ import BlogCategories from "./BlogCategories";
 import BlogContentFields from "./BlogContentFields";
 import Flex from "../../../containers/flex/Flex";
 import BlogTags from "./BlogTags";
+import useBlog from "../../../hooks/useBlog";
 
 const initialState = {
   title: "",
@@ -47,9 +43,10 @@ const initialState = {
   }, //something bout food
 };
 const CreateBlog = () => {
+  const blog = useBlog();
+  const { data } = blog;
   const dispatch = useDispatch();
   const sanitize = DOMPurify.sanitize;
-  const [formData, setFormData] = useState(initialState);
   const [fileInfo, setFileInfo] = useState({
     name: "",
     size: "",
@@ -57,134 +54,19 @@ const CreateBlog = () => {
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let sanitizedFormData = formData;
-    console.log(formData);
-    sanitizedFormData = {
-      ...sanitizedFormData,
-      title: sanitize(formData.title),
-      slug: sanitize(formData.slug),
-      content: sanitizeArray(formData.content),
-      summary: sanitize(formData.summary),
-      tags: sanitizeArray(formData.tags),
-      categories: sanitizeObject(formData.categories),
-    };
-    console.log(sanitizedFormData);
-    // const result = await dispatch(createBlogThunk(sanitizedFormData));
-    // console.log(result);
+    blog.create();
   };
 
-  // handle change texts?
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const val = e.target.value;
-    if (name === createBlogIds.TITLE) {
-      setFormData({
-        ...formData,
-        title: val,
-      });
-    } else if (name === createBlogIds.SLUG) {
-      setFormData({
-        ...formData,
-        slug: val,
-      });
-    } else if (name === createBlogIds.CONTENT) {
-      setFormData({
-        ...formData,
-        content: val,
-      });
-    } else if (name === createBlogIds.SUMMARY) {
-      setFormData({
-        ...formData,
-        summary: val,
-      });
-    }
-  };
-  // changing image
-  const handleChangeImage = (file) => {
-    const MAX_SIZE_MB = 5;
-    const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
-    setFileInfo({
-      name: "",
-      size: "",
-      type: "",
-    });
-
-    if (!file) {
-      setFormData({
-        ...formData,
-        coverImage: null,
-      });
-      return;
-    }
-    const allowedTypes = ["image/jpg", "image/jpeg", "image/png"];
-
-    setFileInfo({
-      name: "",
-      size: "",
-      type: "",
-    });
-
-    if (!allowedTypes.includes(file.type)) {
-      setFormData({
-        ...formData,
-        coverImage: null,
-      });
-      return;
-    }
-    if (file.size > MAX_SIZE_BYTES) {
-      e.target.value = null;
-      setFormData({
-        ...formData,
-        coverImage: null,
-      });
-      return;
-    }
-    setFileInfo({
-      name: file.name,
-      size: (file.size / 1024).toFixed(2).toString() + " KB",
-      type: file.type,
-    });
-
-    setFormData({
-      ...formData,
-      coverImage: file,
-    });
-    console.log(file);
-  };
   //resets the fileds
   const handleReset = (e) => {
     e.preventDefault();
-    setFormData(initialState);
+    data.reset();
     setFileInfo({
       name: "",
       size: "",
       type: "",
     });
   };
-
-  // for tgas
-  const handleUpdateTags = (newTags) => {
-    setFormData({
-      ...formData,
-      tags: newTags,
-    });
-  };
-  // for cates
-  const handleUpdateCategories = (newCats) => {
-    setFormData({
-      ...formData,
-      categories: newCats,
-    });
-  };
-
-  //content
-  const handleChangeContent = (newContent) => {
-    setFormData({
-      ...formData,
-      content: newContent,
-    });
-  };
-
   return (
     <Page>
       <Form
@@ -198,13 +80,10 @@ const CreateBlog = () => {
             <InputText
               id="create-blog-title"
               type="text"
-              value={formData.title}
-              handleChange={(e) =>
-                setFormData({
-                  ...formData,
-                  title: e.target.value,
-                })
-              }
+              value={data.title}
+              handleChange={(e) => {
+                data.updateField("title", e.target.value);
+              }}
             />
           </FormField>
           <FormField>
@@ -215,23 +94,15 @@ const CreateBlog = () => {
             <InputText
               id="create-blog-slug"
               type="text"
-              value={formData.slug}
-              handleChange={(e) =>
-                setFormData({
-                  ...formData,
-                  slug: e.target.value,
-                })
-              }
+              value={data.slug}
+              handleChange={(e) => {
+                data.updateField("slug", e.target.value);
+              }}
             />
           </FormField>
-          <BlogContentFields
-            content={formData.content}
-            handleChangeContent={handleChangeContent}
-          />
-          <BlogTags
-            tags={formData.tags}
-            handleUpdateTags={handleUpdateTags}
-          />
+          <BlogContentFields blog={blog} />
+          <BlogTags blog={blog} />
+          {/* <BlogCategories blog={blog} /> */}
         </FormFields>
         <FormActions flow="row">
           <FormButton

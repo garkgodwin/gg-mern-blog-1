@@ -6,14 +6,15 @@ const sanitizeInput = (input) => {
     .replace(/<script[^>]*?>.*?<\/script>/gi, "")
     .replace(/<[^>]+>/g, "");
 };
-
+export const sanitizeText = (text) => {
+  return DOMPurify.sanitize(text);
+};
 export const sanitizeArray = (texts) => {
-  console.log(texts);
   return texts.map((text) => {
     if (typeof text === "object") {
       return sanitizeObject(text);
     }
-    return DOMPurify.sanitize(text);
+    return sanitizeText(text);
   });
 };
 
@@ -21,7 +22,7 @@ export const sanitizeObject = (texts) => {
   return Object.fromEntries(
     Object.entries(texts).map(([key, value]) => [
       key,
-      DOMPurify.sanitize(value),
+      sanitizeText(value),
     ])
   );
 };

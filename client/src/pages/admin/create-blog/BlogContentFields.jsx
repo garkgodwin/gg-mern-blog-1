@@ -5,25 +5,14 @@ import InputText from "../../../components/inputs/InputText";
 import InputTextArea from "../../../components/inputs/InputTextArea";
 import Flex from "../../../containers/flex/Flex";
 
-const BlogContent = ({ content, handleChangeContent }) => {
-  const [xContent, setXContent] = useState(
-    [{ heading: "", body: "" }] // {heading, body}
-  );
-  //section
-  const handleAddNewSection = (e) => {
-    e.preventDefault();
-    setXContent((prev) => [...prev, { heading: "", body: "" }]);
-  };
-
-  useEffect(() => {
-    handleChangeContent(xContent);
-  }, [xContent]);
-
+const BlogContent = ({ blog }) => {
   return (
     <FormField className="blog-content-fields">
-      <Label htmlFor="">Content</Label>
+      <Label htmlFor={`form-blog-content-section-text-${0}`}>
+        Content
+      </Label>
 
-      {xContent.map((sect, i) => {
+      {blog.data.content.map((sect, i) => {
         return (
           <div key={i} className="blog-content-field">
             <Flex flow="row" flexBasis="auto">
@@ -37,19 +26,13 @@ const BlogContent = ({ content, handleChangeContent }) => {
                 id={`form-blog-content-section-text-${i}`}
                 value={sect.heading}
                 handleChange={(e) => {
-                  setXContent((prev) =>
-                    prev.map((item, itemIndex) =>
-                      itemIndex === i
-                        ? { ...item, heading: e.target.value }
-                        : item
-                    )
-                  );
+                  blog.updateContent(i, "heading", e.target.value);
                 }}
               />
             </Flex>
             <Flex flow="row">
               <Label
-                htmlFor={`form-blog-content-section-text-${i}`}
+                htmlFor={`form-blog-content-section-textarea-${i}`}
                 isMain={false}
               >
                 Section {i + 1} Body:
@@ -58,20 +41,16 @@ const BlogContent = ({ content, handleChangeContent }) => {
                 id={`form-blog-content-section-textarea-${i}`}
                 value={sect.body}
                 handleChange={(e) => {
-                  setXContent((prev) =>
-                    prev.map((item, itemIndex) =>
-                      itemIndex === i
-                        ? { ...item, body: e.target.value }
-                        : item
-                    )
-                  );
+                  blog.updateContent(i, "body", e.target.value);
                 }}
               />
             </Flex>
           </div>
         );
       })}
-      <button onClick={handleAddNewSection}>Add New Section</button>
+      <button onClick={(e) => blog.addContent()}>
+        Add New Section
+      </button>
     </FormField>
   );
 };
