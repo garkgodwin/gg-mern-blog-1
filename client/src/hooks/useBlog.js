@@ -37,6 +37,7 @@ const useBlog = (initialData = defaultData) => {
     title: "",
     slug: "",
     tag: "",
+    content: "",
   });
   const [tag, setTag] = useState(initialTagState);
 
@@ -57,17 +58,42 @@ const useBlog = (initialData = defaultData) => {
     }));
   };
 
+  //? CONTENT INFO
   const updateContent = (index, key, value) => {
+    setError({
+      ...error,
+      content: "",
+    });
     const updatedContent = data.content.map((item, i) =>
       i === index ? { ...item, [key]: value } : item
     );
     setData((prev) => ({ ...prev, content: updatedContent }));
   };
-
   const addContent = () => {
+    setError({
+      ...error,
+      content: "",
+    });
     setData((prev) => ({
       ...prev,
       content: [...prev.content, { heading: "", body: "" }],
+    }));
+  };
+  const removeContent = (index) => {
+    setError({
+      ...error,
+      content: "",
+    });
+    if (data.content.length === 1) {
+      setError({
+        ...error,
+        content: "You cannot leave the content empty.",
+      });
+      return;
+    }
+    setData((prev) => ({
+      ...prev,
+      content: prev.content.filter((_, i) => i !== index),
     }));
   };
 
@@ -203,8 +229,11 @@ const useBlog = (initialData = defaultData) => {
     tag,
     updateField,
     updateCategory,
+    // contents
     updateContent,
     addContent,
+    removeContent,
+    // tags
     typeTag,
     clearTypeTagText,
     addTag,

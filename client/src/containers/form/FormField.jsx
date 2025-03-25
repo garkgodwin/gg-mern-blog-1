@@ -5,6 +5,7 @@ const FormField = ({
   flow = "col",
   flexBasis = "auto",
   justifyContent = "start",
+  error = "",
   className = "",
   children,
 }) => {
@@ -15,6 +16,7 @@ const FormField = ({
       className={`form-field form-field-justify-${justifyContent} ${className}`}
     >
       {children}
+      {error !== "" && <span className="error-field">{error}</span>}
     </Flex>
   );
 };

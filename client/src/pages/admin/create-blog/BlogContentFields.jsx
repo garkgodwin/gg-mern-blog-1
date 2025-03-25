@@ -4,10 +4,14 @@ import Label from "../../../components/inputs/Label";
 import InputText from "../../../components/inputs/InputText";
 import InputTextArea from "../../../components/inputs/InputTextArea";
 import Flex from "../../../containers/flex/Flex";
+import FormButton from "../../../components/buttons/FormButton";
 
 const BlogContent = ({ blog }) => {
   return (
-    <FormField className="blog-content-fields">
+    <FormField
+      className="blog-content-fields"
+      error={blog.error.content}
+    >
       <Label htmlFor={`form-blog-content-section-text-${0}`}>
         Content
       </Label>
@@ -45,12 +49,27 @@ const BlogContent = ({ blog }) => {
                 }}
               />
             </Flex>
+
+            <Flex>
+              <FormButton
+                type="button"
+                size="sm"
+                outlined={true}
+                handleClick={(e) => blog.removeContent(i)}
+              >
+                Remove
+              </FormButton>
+            </Flex>
           </div>
         );
       })}
-      <button onClick={(e) => blog.addContent()}>
+      <FormButton
+        type="button"
+        size="sm"
+        handleClick={(e) => blog.addContent()}
+      >
         Add New Section
-      </button>
+      </FormButton>
     </FormField>
   );
 };
